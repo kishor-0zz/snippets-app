@@ -1,14 +1,21 @@
+import { db } from "@/app/db"
+import { notFound } from "next/navigation"
 
+export default async function snippets(props){
 
+const snippet = await db.snippet.findFirst({
+    where: {id:parseInt(props.params.id)}
+})
 
-
-
-export default function snippets(props){
-console.log(props);
+if(!snippet){
+    return notFound();
+}
 
     return(
         <div>
-            {props.id}
+            {snippet.title}
         </div>
     )
 }
+
+
