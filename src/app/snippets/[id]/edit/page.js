@@ -6,7 +6,7 @@ import React from 'react';
 const SnippteEditPage = async ({params}) => {
     const id  = parseInt(params.id);
     const snippet = await db.snippet.findFirst({
-        where:{id:id}
+        where:{id:parseInt(id)}
     })
     if (!snippet) {
         return notFound();

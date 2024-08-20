@@ -17,7 +17,7 @@ const CreateSnippetPage = () => {
             },
         });
         console.log(snippet);
-        redirect('/home')
+        // redirect('/home')
     }
 
     return (
