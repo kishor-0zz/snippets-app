@@ -67,29 +67,71 @@ export async function deleteSnippet(id) {
     redirect('/home');
 }
 
-export async function createSnippets(formData, formState) {
+
+
+
+
+// export async function createSnippets(formData) {
+//     // Assuming formData is a plain object
+//     const { title, code } = formData;
+
+//     // Validate title
+//     if (typeof title !== "string" || title.length < 3) {
+//         return { message: 'Title must be longer than 3 characters' };
+//     }
+
+//     // Validate code
+//     if (typeof code !== "string" || code.length <= 10) {
+//         return { message: 'Code must be longer than 10 characters' };
+//     }
+
+//     // Try to create the snippet in the database
+//     try {
+//         const snippet = await db.snippet.create({
+//             data: { title, code },
+//         });
+
+//         console.log(snippet);
+
+//         // Redirect upon successful creation
+//         redirect('/home');
+//     } catch (error) {
+//         console.error("Error creating snippet:", error);
+//         return { message: 'An error occurred while creating the snippet.' };
+//     }
+// }
+
+
+
+export async function createSnippets(formData) {
+    // Extract the form data
     const title = formData.get("title");
     const code = formData.get("code");
 
+    // Validate title
     if (typeof title !== "string" || title.length <= 3) {
-        return {
-            message: 'Title must be longer than 3 characters',
-        };
+        return { message: 'Title must be longer than 3 characters' };
     }
 
+    // Validate code
     if (typeof code !== "string" || code.length <= 10) {
-        return {
-            message: 'Code must be longer than 10 characters',
-        };
+        return { message: 'Code must be longer than 10 characters' };
     }
 
-    const snippet = await db.snippet.create({
-        data: {
-            title,
-            code,
-        },
-    });
-    
-    console.log(snippet);
-    redirect('/home');
+    // Try to create the snippet in the database
+    try {
+        const snippet = await db.snippet.create({
+            data: { title, code },
+        });
+
+        console.log(snippet);
+
+        // Redirect upon successful creation
+        redirect('/home');
+    } catch (error) {
+        console.error("Error creating snippet:", error);
+        return { message: 'An error occurred while creating the snippet.' };
+    }
 }
+
+
