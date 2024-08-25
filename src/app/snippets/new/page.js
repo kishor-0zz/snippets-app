@@ -1,28 +1,18 @@
-// "use client"
+"use client"
+import { useFormState } from "react-dom";
 import { db } from "@/app/db";
 import { redirect } from "next/navigation";
+import * as actions from '@/actions';
 
 
 const CreateSnippetPage = () => {
-    async function creatSnippets(fromData){
-    "use server";
-
-    const title = fromData.get("title");
-    const code = fromData.get("code");
-
-    const snippet = await db.snippet.create({
-        data:{
-            title,
-            code,
-            },
-        });
-        console.log(snippet);
-        // redirect('/home')
-    }
+    const [formState, action]=useFormState(actions.creatSnippets,{
+        message:" ",
+    })
 
     return (
         <div className='container py-5'>
-            <form action={creatSnippets}>
+            <form action={action}>
                 <div className="mb-3">
                     <label htmlFor="title" className="form-label">title</label>
                     <input type="text" className="form-control" id="title" name="title" />
@@ -31,6 +21,9 @@ const CreateSnippetPage = () => {
                     <label htmlFor="code" className="form-label">code</label>
                     <textarea type="text" className="form-control" id="code" name="code" />
                 </div>
+                {
+                    formState.message ? formState.message: null
+                }
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         </div>

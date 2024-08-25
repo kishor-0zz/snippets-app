@@ -1,17 +1,23 @@
+// "use client"
+
+import { deleteSnippet } from "@/actions";
 import { db } from "@/app/db"
 import Link from "next/link";
 import { notFound } from "next/navigation"
 
 export default async function snippets(props){
-await new Promise((r)=>setTimeout(r,3000))
+    await new Promise((r)=>setTimeout(r,3000))
 
-const snippet = await db.snippet.findFirst({
-    where: {id:parseInt(props.params.id)}
-})
+    const snippet = await db.snippet.findFirst({
+        where: {id:parseInt(props.params.id)}
+    })
 
-if(!snippet){
-    return notFound();
-}
+    if(!snippet){
+        return notFound();
+    }
+    const deleteHandel = deleteSnippet.bind(null,snippet.id)
+      
+    
 
     return(
         <div className="container">
@@ -19,7 +25,9 @@ if(!snippet){
                 <h4>{snippet.title}</h4>
                 <div className="d-flex">
                     <Link href={`/snippets/${snippet.id}/edit`} className="p-2">Edit</Link>
-                    <button className="p-2">delete</button>
+                    <form action={deleteHandel}>
+                        <button className="p-2">delete</button>
+                    </form>
                 </div>
             </div>
             
