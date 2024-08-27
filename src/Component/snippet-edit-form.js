@@ -26,7 +26,7 @@ export default function SnippteEditForm({snippet}){
                 height="30vh"
                 defaultLanguage="javascript"
                 theme="vs-dark"
-                defaultValue={snippet.code}
+                defaultValue={code}
                 options={{minimap:{enabled:false} }}
                 onChange={handelEditorChange}
             />

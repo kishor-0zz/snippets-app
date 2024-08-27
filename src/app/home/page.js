@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const home = async() => {
     const snippets = await db.snippet.findMany();
-    console.log(snippets);
+    // console.log(snippets);
     
     return (
         <div className='container'>

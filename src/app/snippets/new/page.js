@@ -5,11 +5,15 @@ import * as actions from '@/actions';
 const CreateSnippetPage = () => {
     const [formState, action] = useFormState(actions.createSnippets, {
         message: " ",
-    });
+    }
+);
+
+   
 
     return (
         <div className='container py-5'>
-            <form action={action}>
+            <form 
+            action={action}>
                 <div className="mb-3">
                     <label htmlFor="title" className="form-label">Title</label>
                     <input type="text" className="form-control" id="title" name="title" />
