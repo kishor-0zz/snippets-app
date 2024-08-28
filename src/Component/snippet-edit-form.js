@@ -13,10 +13,11 @@ export default function SnippteEditForm({snippet}){
         SetCode(value)
         
     }
-    const editSnippetAction = async(event)=>{
-      event.preventDefault();
-      await actions.editSnippet(snippet.id, code)
-    }
+    // const editSnippetAction = async(event)=>{
+    //   event.preventDefault();
+    //   await actions.editSnippet(snippet.id, code)
+    // }
+    const editSnippetAction = actions.editSnippet.bind(null,snippet.id, code)
     
     
 
@@ -30,9 +31,12 @@ export default function SnippteEditForm({snippet}){
                 options={{minimap:{enabled:false} }}
                 onChange={handelEditorChange}
             />
-            <form onSubmit={editSnippetAction} >
+            <form action={editSnippetAction} >
                 <button type="submit" >save</button>
             </form>
+            {/* <form onSubmit={editSnippetAction} >
+                <button type="submit" >save</button>
+            </form> */}
         </div>
     )
 }
