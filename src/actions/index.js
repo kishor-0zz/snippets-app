@@ -22,27 +22,33 @@ export async function createSnippets(prevState, formData) {
     const title = formData.get("title");
     const code = formData.get("code");
 
-    // Validate title
-    if (typeof title !== "string" || title.length <= 3) {
-        return { message: 'Title must be longer than 3 characters' };
-    }
 
-    // Validate code
-    if (typeof code !== "string" || code.length <= 10) {
-        return { message: 'Code must be longer than 10 characters' };
-    }
+    try{
+        if (typeof title !== "string" || title.length <= 3) {
+            return { message: 'Title must be longer than 3 characters' };
+        }
 
-    // Try to create the snippet in the database
-    
-        const snippet = await db.snippet.create({
-            data: { title, code },
+        if (typeof code !== "string" || code.length <= 10) {
+            return { message: 'Code must be longer than 10 characters' };
+        }
+        await db.snippet.create({
+            data: { 
+                title, 
+                code 
+            },
         });
 
-        console.log(prevState);
-        // Redirect upon successful creation
-        redirect('/home');
+    }catch{
+        if(error){
+            return error.message;
+        } else{
+            return{
+                message:"this is wrong"
+            }
+        }
 
-    
+    }
+    redirect('/home');
 }
 
 
