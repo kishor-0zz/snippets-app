@@ -2,8 +2,8 @@ import React from 'react';
 
 const SnippetNotFound = () => {
     return (
-        <div>
-            <h2>snippets not found</h2>
+        <div className='container'>
+            <h2 className='color-primery'>snippets not found</h2>
         </div>
     );
 };

@@ -8,15 +8,11 @@ import * as actions from "@/actions";
 export default function SnippteEditForm({snippet}){
 
     const [code, SetCode] = useState(snippet.code)
-
+    
     const handelEditorChange =(value)=>{
         SetCode(value)
         
     }
-    // const editSnippetAction = async(event)=>{
-    //   event.preventDefault();
-    //   await actions.editSnippet(snippet.id, code)
-    // }
     const editSnippetAction = actions.editSnippet.bind(null,snippet.id, code)
     
     
@@ -34,9 +30,6 @@ export default function SnippteEditForm({snippet}){
             <form action={editSnippetAction} >
                 <button type="submit" >save</button>
             </form>
-            {/* <form onSubmit={editSnippetAction} >
-                <button type="submit" >save</button>
-            </form> */}
         </div>
     )
 }
